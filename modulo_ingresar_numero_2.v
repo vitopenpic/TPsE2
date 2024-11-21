@@ -1,7 +1,7 @@
 //Implementacion de una maquina de estados de Moore en Verilog
-module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable);
-    input wire clk, reset, ingresar_numero_en; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
-    output reg  operando_en, contador, enable, ingresar_numero_1_en;               // Control output
+module ingresar_numero_2 (clk, reset, ingresar_numero_2_en, contador, operando_en, enable, igual_en, ingresar_numero_en);
+    input wire clk, reset, ingresar_numero_1_en;   // Clock, reset, sensor inputs (async)
+    output reg  operando_en, contador, enable, igual_en;               // Control output
     //output [2:1] y;         // State output (para debug)
 
     reg [1:0] curr_state, next_state;
@@ -16,7 +16,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
     always @(in, curr_state)
         case (curr_state)
             Esperar: begin 
-                    if (ingresar_numero_1_en == 1 && ingresar_numero_en == 1) begin
+                    if (ingresar_numero_2_en == 1 && ingresar_numero_en=1) begin
                         next_state <= Enable;
                     end   
                     else begin 
@@ -53,23 +53,35 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
 				begin
                     enable <= 1;
                     operando_en<=0;
-                    contador = contador + 1;
+                    contador <= contador + 1;
+                    igual_en<=0;
 				end
 			else if (curr_state == Mostrar_numero)	
 				begin
                     enable <= 0;
                     operando_en<=0;
+                    igual_en<=0;
 				end
             else if (curr_state == Operando)	
 				begin
+					igual_en<=1;
                     contador<=0;
                     enable<=0;
-                    ingresar_numero_1_en<=0;
 				end
             else if (curr_state == Esperar)	
 				begin
-					
+					operando_en<=0;
                     enable<=0;
+                    igual_en<=0;
 				end
 		end
 endmodule
+
+
+
+			else if (curr_state == Alu)	
+				begin
+                    igual_en<=1;
+                    ingresar_numero_1_en<=0;
+                    ingresar_numero_2_en<=0;
+				end

@@ -28,8 +28,6 @@ module es_operacion (clk, reset, que_operacion, operando_en);
              Operacion: begin 
                     if(que_operacion == 1 || que_operacion_2==2)
                     next_state <= IngreseNum_2;
-                    else if(que_operacion == 3 || igual_en==1 )
-                    next_state <= Alu
                 end
             Alu: begin 
                 next_state <= Esperar;
@@ -56,21 +54,20 @@ module es_operacion (clk, reset, que_operacion, operando_en);
 				begin
                     
                     igual_en=0;
-                    ingresar_numero_1_en=>0;
-                    ingresar_numero_2_en=>0;
-                    
+                    ingresar_numero_1_en<=0;
+                    ingresar_numero_2_en<=0;
 				end
 			else if (curr_state == Alu)	
 				begin
-                    igual_en=>1;
-                    ingresar_numero_1_en=>0;
-                    ingresar_numero_2_en=>0;
+                    igual_en<=1;
+                    ingresar_numero_1_en<=1;
+                    ingresar_numero_2_en<=0;
 				end
             else if (curr_state == IngreseNum_2)	
 				begin
                     igual_en=>0;
-                    ingresar_numero_1_en=>0;
-                    ingresar_numero_2_en=>2;
+                    ingresar_numero_1_en<=0;
+                    ingresar_numero_2_en<=1;
 				end
             else if (curr_state == Esperar)	
 				begin
