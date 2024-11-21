@@ -1,6 +1,6 @@
 //Implementacion de una maquina de estados de Moore en Verilog
-module fsm_mealy (clk, reset, ingresar_numero, contador, operando_en, enable);
-    input wire clk, reset, ingresar_numero,;   // Clock, reset, sensor inputs (async)
+module fsm_mealy (clk, reset, ingresar_numero_1_en, contador, operando_en, enable);
+    input wire clk, reset, ingresar_numero_1_en;   // Clock, reset, sensor inputs (async)
     output reg  operando_en, contador, enable;               // Control output
     //output [2:1] y;         // State output (para debug)
 
@@ -16,7 +16,7 @@ module fsm_mealy (clk, reset, ingresar_numero, contador, operando_en, enable);
     always @(in, curr_state)
         case (curr_state)
             Esperar: begin 
-                    if (ingresar_numero == 1) begin
+                    if (ingresar_numero_1_en == 1) begin
                         next_state <= Enable;
                     end   
                     else begin 
@@ -27,8 +27,8 @@ module fsm_mealy (clk, reset, ingresar_numero, contador, operando_en, enable);
                     next_state <= Mostrar_numero;
                 end
             Mostrar_numero: begin 
-                    if (ingresar_numero == 0 && contador == 4) next_state <= Operando;
-                    else if (ingresar_numero == 0 && contador < 4) next_state <= Esperar;
+                    if (ingresar_numero_1_en == 0 && contador == 4) next_state <= Operando;
+                    else if (ingresar_numero_1_en == 0 && contador < 4) next_state <= Esperar;
                     else next_state <= Mostrar_numero;
                 end
             Operando: begin
