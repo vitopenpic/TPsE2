@@ -1,5 +1,5 @@
 //Implementacion de una maquina de estados de Moore en Verilog
-module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, numero, numero_en); //numero en viene del teclaro si toco un numero
+module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en); //numero en viene del teclaro si toco un numero
     input wire clk, reset, ingresar_numero_en, nuevo_numero, numero2_en, numero_en; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
     output reg  operando_en, enable, ingresar_numero_1_en;               // Control output
     //output [2:1] y;         // State output (para debug)
@@ -27,10 +27,13 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
                 end
              Enable: begin 
                     next_state <= Mostrar_numero;
+
                 end
             Mostrar_numero: begin 
-                    if(dectector==1) //solamente hacelo si sigue la entrada de clock activa
+                    if(dectector==1) ;//solamente hacelo si sigue la entrada de clock activa
                     begin
+                    numero<=numero<<4; //corro el numero 4 veces
+                    numero[3:0]<=nuevo_numero;
                     if (ingresar_numero_1_en == 0 && contador == 4) next_state <= Operando;
                     else if (ingresar_numero_1_en == 0 && contador < 4) next_state <= Esperar;
                     else next_state <= Mostrar_numero;
@@ -69,7 +72,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
 				begin
                     enable <= 1;
                     operando_en<=0;
-                    contador = contador + 1;
+                    contador <= contador + 1;
 				end
 			else if (curr_state == Mostrar_numero)	
 				begin
