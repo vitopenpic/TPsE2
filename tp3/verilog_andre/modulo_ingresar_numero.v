@@ -19,7 +19,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
     parameter [1:0] Enable= 2'b11;
 
     // Logica de proximo estado (combinacional)
-    always @(posedge clk, ingresar_numero_en)
+    always @(posedge clk, ingresar_numero_1_en)
         case (curr_state)
             Esperar: begin 
                     if (ingresar_numero_1_en == 1 && ingresar_numero_en == 1 && detector==1) begin
