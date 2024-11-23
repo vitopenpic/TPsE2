@@ -1,7 +1,7 @@
 //
-module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en); //numero en viene del teclaro si toco un numero
+module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en, ingresar_numero_2_en); //numero en viene del teclaro si toco un numero
     input wire clk, reset, ingresar_numero_en, nuevo_numero, numero2_en, numero_en; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
-    output reg  operando_en, enable, ingresar_numero_1_en;               // Control output
+    output reg  operando_en, enable, ingresar_numero_1_en, ingresar_numero_2_en;               // Control output
     //output [2:1] y;         // State output (para debug)
     output reg[1:0] contador; //de 2 bits, cuenta hasta 4
 
@@ -91,6 +91,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
                     contador<=0;
                     enable<=0;
                     ingresar_numero_1_en<=0;// deshabilito el ingreso de numeros
+                    ingresar_numero_2_en<=0;
 				end
             else if (curr_state == Esperar)	
 
