@@ -3,8 +3,7 @@ module es_operacion (clk, reset, que_operacion, operando_en, igual_en, resultado
     output reg  contador, enable, igual_en, resultado_en, ingresar_numero_1_en, ingresar_numero_2_en;               // Control output
     //output [2:1] y;         // State output (para debug)
     output reg ingresar_numero_1_en, ingresar_numero_2_en; //flags
-    reg [1:0] curr_state, next_state; 
-
+    reg [1:0] curr_state, next_state, suma_resta; 
     // Asignacion de estados
     parameter [1:0] Esperar = 2'b00;
     parameter [1:0] Operacion = 2'b01;
@@ -58,6 +57,8 @@ module es_operacion (clk, reset, que_operacion, operando_en, igual_en, resultado
                     
                     ingresar_numero_1_en<=0;
                     ingresar_numero_2_en<=0; //nada habilitado
+                    resultado_en<=0;
+                    suma_resta<=que_operacion; //guardo que tengo que hacer
 				end
 			else if (curr_state == Alu)	
 				begin
