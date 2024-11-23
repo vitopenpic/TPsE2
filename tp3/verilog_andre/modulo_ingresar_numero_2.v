@@ -7,7 +7,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
 
 
     reg [1:0] curr_state, next_state; 
-    reg [15:0] numero_1; ///guarda el numero que llega
+    reg [15:0] numero_2; ///guarda el numero que llega
     reg in_prev; //es para guardar el valor anterior y compararlo con el acitual
     reg detector; //un flag
     // Asignacion de estados
@@ -22,7 +22,7 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
     always @(posedge clk, ingresar_numero_en)
         case (curr_state)
             Esperar: begin 
-                    if (ingresar_numero_1_en == 1 && ingresar_numero_en == 1 && detector==1) begin
+                    if (ingresar_numero_2_en == 1 && ingresar_numero_en == 1 && detector==1) begin
                         next_state <= Enable;
                     end   
                     else begin 
@@ -78,13 +78,13 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
 				begin
                     enable <= 0;
                     operando_en<=0;
-                    numero_1<=numero_1<<4; //corro mi numero
-                    numero_1<=numero_1[3:0]; //guardo solo ultimos 4 bits
+                    numero_2<=numero_2<<4; //corro mi numero
+                    numero_2<=numero_2[3:0]; //guardo solo ultimos 4 bits
 				end
             else if (curr_state == Operando)	
 				begin
+                    igual_en<=1; //habilito el igual
                     contador<=0;
-                    igual_en<=0; //desabilito el igual, ya que si es el primer numero no quiero un igual 
                     enable<=0;
                     ingresar_numero_1_en<=0;// deshabilito el ingreso de numeros
                     ingresar_numero_2_en<=0;

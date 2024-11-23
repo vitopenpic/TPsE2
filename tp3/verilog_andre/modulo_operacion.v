@@ -1,6 +1,6 @@
-module es_operacion (clk, reset, que_operacion, operando_en); //si operando es en este modulo empieza a funcionar
+module es_operacion (clk, reset, que_operacion, operando_en, igual_en); //si operando es en este modulo empieza a funcionar
     input wire clk, reset, operando_en,ingresar_numero_1_en, ingresar_numero_2_en;   // Clock, reset, sensor inputs (async) //operando_en viene desde el teclado
-    output reg  contador, enable;               // Control output
+    output reg  contador, enable, igual_en;               // Control output
     //output [2:1] y;         // State output (para debug)
     output reg ingresar_numero_1_en, ingresar_numero_2_en; //flags
     reg [1:0] curr_state, next_state; 
@@ -28,9 +28,10 @@ module es_operacion (clk, reset, que_operacion, operando_en); //si operando es e
                     if(que_operacion == 1 || que_operacion ==2) //si es suma o resta
                     next_state <= IngreseNum_2;
                 end
-                else if(que_operacion == 3) //si es igual
+                else if(que_operacion == 3 && igual_en==1) //si es igual
                     next_state <= Alu;
-
+                else 
+                    next_state <= Esperar;
             Alu: begin 
                 next_state <= Esperar;
                 end
