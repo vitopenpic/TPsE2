@@ -1,7 +1,7 @@
 //
-module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en, ingresar_numero_2_en, igual_en); //numero en viene del teclaro si toco un numero
-    input wire clk, reset, ingresar_numero_1_en, nuevo_numero, ingresar_numero_2_en, numero_en; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
-    output reg  operando_en, enable, ingresar_numero_1_en,  igual_en;               // Control output
+module modulo_ingresar_numero (clk, reset,operando__int_en ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en, ingresar_numero_2_en, igual_en); //numero en viene del teclaro si toco un numero
+    input wire clk, reset, nuevo_numero, ingresar_numero_2_en, numero_en, ; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
+    output reg  operando_en, enable, ingresar_numero_1_en,  igual_en, operando_int_en;               // Control output
     //output [2:1] y;         // State output (para debug)
     output reg[1:0] contador; //de 2 bits, cuenta hasta 4
 
@@ -71,13 +71,13 @@ module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, opera
 			if (curr_state == Enable) //estado bobo pero necesario para que el contador no cuente con el clk 
 				begin
                     enable <= 1;
-                    operando_en<=0; //desabilito operando por las dudas
+                    operando__int_en<=0; //desabilito operando por las dudas
                     contador <= contador + 1;
 				end
 			else if (curr_state == Mostrar_numero)	
 				begin
                     enable <= 0;
-                    operando_en<=0;
+                    operando__int_en<=0;
                     numero_2<=numero_2<<4; //corro mi numero
                     numero_2<=numero_2[3:0]; //guardo solo ultimos 4 bits
 				end
