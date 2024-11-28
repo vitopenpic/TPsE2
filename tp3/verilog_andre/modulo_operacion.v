@@ -24,10 +24,10 @@ module es_operacion (clk, reset,operando_int_en ,que_operacion, operando_en, igu
                     end
                 end
              Operacion: begin 
-                    if(que_operacion == 1 || que_operacion ==2) //si es suma o resta
+                    if(que_operacion == 10 || que_operacion ==11) //si es suma o resta
                     next_state <= IngreseNum_2;
                 end
-                else if(que_operacion == 3 && igual_en==1) //si es igual
+                else if(que_operacion == 15 && igual_en==1) //si es igual
                     next_state <= Alu;
                 else 
                     next_state <= Esperar;

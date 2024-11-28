@@ -21,9 +21,9 @@ module es_operacion_bcd (
             resultado_temp = 20'b0;
 
             // Realizar suma o resta binaria directa
-            if (suma_resta == 1) begin
+            if (suma_resta == 10) begin
                 resultado_temp = numero_1 + numero_2;  // Suma
-            end else if (suma_resta == 2) begin
+            end else if (suma_resta == 11) begin
                 resultado_temp = numero_1 - numero_2;  // Resta
             end else begin
                 resultado_temp = 20'b0;
