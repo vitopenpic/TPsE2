@@ -23,7 +23,7 @@ module testbench2;
       #17 reset = 0;
       #10 enable = 1;
 
-      #200 $finish;
+      #400 $finish;
   end
  
 endmodule

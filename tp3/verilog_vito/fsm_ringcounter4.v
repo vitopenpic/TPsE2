@@ -1,7 +1,7 @@
 //Implementacion de una maquina de estados de Moore en Verilog
 module fsm_ringcounter4 (clk, reset, enable_in, out);
     input clk, reset, enable_in;   // Clock, reset, enable in
-    output reg [3:0] out;          // Output
+    output [3:0] out;          // Output
     //output [2:1] y;              // State output (para debug)
 
     reg [2:1] curr_y, next_Y;
@@ -49,19 +49,4 @@ module fsm_ringcounter4 (clk, reset, enable_in, out);
     assign out[2] = (curr_y == E2);
     assign out[1] = (curr_y == E3);
     assign out[0] = (curr_y == E4);
-    
-	// Salida (con always)
-    /*
-	always @(curr_y)
-		begin 
-          if (curr_y == E1)
-		      out = 4'b1000;
-          else if (curr_y == E2)	
-		      out = 4'b0100;
-          else if (curr_y == E3)	
-		      out = 4'b0010;
-          else if (curr_y == E4)	
-		      out = 4'b0001;
-		end
-     */
 endmodule
