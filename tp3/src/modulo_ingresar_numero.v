@@ -1,5 +1,16 @@
 //
-module modulo_ingresar_numero (clk, reset, ingresar_numero_1_en, contador, operando_en, enable, nuevo_numero, numero_en, ingresar_numero_2_en, igual_en); //numero en viene del teclaro si toco un numero
+module modulo_ingresar_numero (
+    clk, 
+    reset, 
+    ingresar_numero_1_en, 
+    contador, 
+    operando_en, 
+    enable, 
+    nuevo_numero, 
+    numero_en, 
+    ingresar_numero_2_en, 
+    igual_en); //numero en viene del teclaro si toco un numero
+    
     input wire clk, reset, ingresar_numero_1_en, nuevo_numero, numero2_en, numero_en; //ingresar_num_en es del teclado    // Clock, reset, sensor inputs (async)
     output reg  operando_int_en, enable, ingresar_numero_2_en, igual_en;               // Control output
     //output [2:1] y;         // State output (para debug)
